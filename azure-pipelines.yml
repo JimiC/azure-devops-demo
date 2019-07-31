@@ -1,23 +1,20 @@
 stages:
   - stage: Test
     jobs:
-      - job: Linux
-        pool:
+      - template: azure-pipelines/templates/jobs/setup.yml
+        parameters:
+          name: Linux
           vmImage: ubuntu-latest
-        steps:
-          - template: azure-pipelines/templates/step-checkout.yml
-          - script: echo Hello from Linux
+          script: echo Hello from Linux
     
-      - job: MacOS
-        pool:
+      - template: azure-pipelines/templates/jobs/setup.yml
+        parameters:
+          name: MacOS          
           vmImage: macOS-latest
-        steps:
-          - template: azure-pipelines/templates/step-checkout.yml
-          - script: echo Hello from MacOS
+          script: echo Hello from MacOS
 
-      - job: Windows
-        pool:
+      - template: azure-pipelines/templates/jobs/setup.yml
+        parameters:
+          name: Windows          
           vmImage: windows-latest
-        steps:
-          - template: azure-pipelines/templates/step-checkout.yml
-          - script: echo Hello from Windows
+          script: echo Hello from Windows

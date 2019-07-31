@@ -1,0 +1,14 @@
+parameters:
+  name: ''
+  vmImage: ''
+  script: ''
+
+jobs:
+  - job:  ${{ parameters.name}}
+    pool:
+      vmImage: ${{ parameters.vmImage }}
+    steps:
+      - template: ../steps/checkout.yml
+      - template: ../steps/script.yml
+        parameters:
+          script: ${{ parameters.script }}

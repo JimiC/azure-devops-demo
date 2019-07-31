@@ -25,6 +25,9 @@ jobs:
       - task: NodeTool@0
         inputs:
           versionSpec: $(version)
+      - script: |
+          echo 'node --version' && node --version
+          echo 'npm --version' && npm --version
       - template: ../steps/checkout.yml
       - script: npm install
       - template: ../steps/script.yml

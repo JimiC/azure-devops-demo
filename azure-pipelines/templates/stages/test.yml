@@ -1,0 +1,4 @@
+stages:
+  - stage: Test
+    jobs:
+      - template: ../jobs/setup.yml

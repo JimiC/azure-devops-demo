@@ -1,25 +1,52 @@
-parameters:
-  name: ''
-  vmImage: ''
-  script: ''
-
 jobs:
-  - job: ${{ parameters.name}}
-
-    pool:
-      vmImage: ${{ parameters.vmImage }}
-
+  - job:
     strategy:
+      maxParallel: 3
       matrix:
-        latest: # latest node
-          version: '12'
+        'linux node latest':
+          imageName: ubuntu-latest
+          version: '12' # latest node
           checkLatest: true
-        '10.11.0': # vscode >= 1.36.0
-          version: '10.11.0'
-        '10.2.0':  # vscode >= 1.31.0 < 1.36.0
-          version: '10.2.0'
-        '8.9.3':   # vscode >= 1.26.0 < 1.31.0
-          version: '8.9.3'
+        'linux node 10.11.0':
+          imageName: ubuntu-latest
+          version: '10.11.0' # vscode >= 1.36.0
+        'linux node 10.2.0':
+          imageName: ubuntu-latest
+          version: '10.2.0' # vscode >= 1.31.0 < 1.36.0
+        'linux node 8.9.3':
+          imageName: ubuntu-latest
+          version: '8.9.3' # vscode >= 1.26.0 < 1.31.0
+
+        'macos node latest':
+          imageName: macos-latest
+          version: '12' # latest node
+          checkLatest: true
+        'macos node 10.11.0':
+          imageName: macos-latest
+          version: '10.11.0' # vscode >= 1.36.0
+        'macos node 10.2.0':
+          imageName: macos-latest
+          version: '10.2.0' # vscode >= 1.31.0 < 1.36.0
+        'macos node 8.9.3':
+          imageName: macos-latest
+          version: '8.9.3' # vscode >= 1.26.0 < 1.31.0
+
+        'windows node latest':
+          imageName: windows-latest
+          version: '12' # latest node
+          checkLatest: true
+        'windows node 10.11.0':
+          imageName: windows-latest
+          version: '10.11.0' # vscode >= 1.36.0
+        'windows node 10.2.0':
+          imageName: windows-latest
+          version: '10.2.0' # vscode >= 1.31.0 < 1.36.0
+        'windows node 8.9.3':
+          imageName: windows-latest
+          version: '8.9.3' # vscode >= 1.26.0 < 1.31.0
+        
+    pool:
+      vmImage: $(imageName)
 
     steps:
       - task: NodeTool@0
@@ -31,5 +58,3 @@ jobs:
       - template: ../steps/checkout.yml
       - script: npm install
       - template: ../steps/script.yml
-        parameters:
-          script: ${{ parameters.script }}

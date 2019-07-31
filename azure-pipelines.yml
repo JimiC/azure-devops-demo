@@ -1,21 +1,3 @@
 name: $(BuildID)
 stages:
-  - stage: Test
-    jobs:
-      - template: azure-pipelines/templates/jobs/setup.yml
-        parameters:
-          name: Linux
-          vmImage: ubuntu-latest
-          script: echo Hello from Linux
-    
-      - template: azure-pipelines/templates/jobs/setup.yml
-        parameters:
-          name: MacOS          
-          vmImage: macOS-latest
-          script: echo Hello from MacOS
-
-      - template: azure-pipelines/templates/jobs/setup.yml
-        parameters:
-          name: Windows          
-          vmImage: windows-latest
-          script: echo Hello from Windows
+  - template: azure-pipelines/templates/stages/test.yml    

@@ -1,5 +1,2 @@
-parameters:
-  script: ''
-
 steps:
-  - script: ${{ parameters.script }}
+  - script: echo Hello World

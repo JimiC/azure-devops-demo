@@ -4,17 +4,20 @@ stages:
       - job: Linux
         pool:
           vmImage: ubuntu-latest
-        steps: 
+        steps:
+          - template: azure-pipelines/templates/step-checkout.yml
           - script: echo Hello from Linux
     
       - job: MacOS
         pool:
           vmImage: macOS-latest
-        steps: 
+        steps:
+          - template: azure-pipelines/templates/step-checkout.yml
           - script: echo Hello from MacOS
 
       - job: Windows
         pool:
           vmImage: windows-latest
-        steps: 
+        steps:
+          - template: azure-pipelines/templates/step-checkout.yml
           - script: echo Hello from Windows

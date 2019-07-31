@@ -1,0 +1,17 @@
+stages:
+  - stage: Test
+    jobs:
+      - job: Linux
+        pool:
+          vmImage: ubuntu-latest
+        steps: echo Hello from Linux
+    
+      - job: MacOS
+        pool:
+          vmImage: macOS-latest
+        steps: echo Hello from MacOS
+
+      - job: Windows
+          pool:
+          vmImage: windows-latest
+        steps: echo Hello from Windows

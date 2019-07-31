@@ -4,11 +4,29 @@ parameters:
   script: ''
 
 jobs:
-  - job:  ${{ parameters.name}}
+  - job: ${{ parameters.name}}
+
     pool:
       vmImage: ${{ parameters.vmImage }}
+
+    strategy:
+      matrix:
+        latest: # latest node
+          version: '12'
+          checkLatest: true
+        '10.11.0': # vscode >= 1.36.0
+          version: '10.11.0'
+        '10.2.0':  # vscode >= 1.31.0 < 1.36.0
+          version: '10.2.0'
+        '8.9.3':   # vscode >= 1.26.0 < 1.31.0
+          version: '8.9.3'
+
     steps:
+      - task: NodeTool@0
+        inputs:
+          versionSpec: $(version)
       - template: ../steps/checkout.yml
+      - script: npm install
       - template: ../steps/script.yml
         parameters:
           script: ${{ parameters.script }}

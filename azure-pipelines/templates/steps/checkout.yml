@@ -1,4 +1,4 @@
 steps:
   - checkout: self
     fetchDepth: 5
-    # submodules: true
+    submodules: false

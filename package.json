@@ -13,8 +13,8 @@
     "@types/node": "10",
     "@types/mocha": "^5.2.7",
     "mocha": "^6.1.4",
-    "chai":"^4.2.0",
-    "tslint":"^5.18.0",
+    "chai": "^4.2.0",
+    "tslint": "^5.18.0",
     "typescript": "^3.5.3"
   }
 }

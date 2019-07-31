@@ -4,14 +4,17 @@ stages:
       - job: Linux
         pool:
           vmImage: ubuntu-latest
-        steps: echo Hello from Linux
+        steps: 
+          - script: echo Hello from Linux
     
       - job: MacOS
         pool:
           vmImage: macOS-latest
-        steps: echo Hello from MacOS
+        steps: 
+          - script: echo Hello from MacOS
 
       - job: Windows
-          pool:
+        pool:
           vmImage: windows-latest
-        steps: echo Hello from Windows
+        steps: 
+          - script: echo Hello from Windows

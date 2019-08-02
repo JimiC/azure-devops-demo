@@ -1,8 +1,8 @@
 parameters:
     vmImages: 
-      Linux: ubuntu-latest
-      MacOS: macos-latest
-      Windows: windows-latest
+      linux: ubuntu-latest
+      macos: macos-latest
+      windows: windows-latest
     nodejs:
       - '12'      # latest
       - '10.11.0' # vscode >= 1.36.0
@@ -11,13 +11,13 @@ parameters:
 
 jobs:
   - job:
-    
+
     strategy:
       maxParallel: 3
       matrix:
         ${{ each image in parameters.vmImages }}:
           ${{ each version in parameters.nodejs }}:
-            '${{ image.key }} NodeJS v${{ version }}':
+            '${{ image.key }} node.js v${{ version }}':
               imageName: ${{ image.value }}
               version: ${{ version }}
               ${{ if not(contains(version, '.')) }}:
@@ -31,9 +31,8 @@ jobs:
       - task: NodeTool@0
         inputs:
           versionSpec: $(version)
-      - script: |
-          echo 'node --version' && node --version
-          echo 'npm --version' && npm --version
       - template: ../steps/checkout.yml
-      - script: npm install
+      - task: Npm@1
+        inputs:
+          command: install
       - template: ../steps/script.yml
